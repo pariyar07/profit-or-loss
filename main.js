@@ -6,34 +6,28 @@ var outputBox = document.querySelector("#output-box");
 
 submitBtn.addEventListener("click", submitHandler);
 
-function submitHandler() {
+function submitHandler(){
     var ip = Number(initialPrice.value);
-    var qty = Number(stocksQuantity.value);
-    var curr = Number(currentPrice.value);
+    var stk = Number(stocksQuantity.value);
+    var curr= Number(currentPrice.value);
 
-    calculateProfitAndLoss(ip, qty, curr);
+    stockProfitAndLoss(ip, stk, curr);
 }
 
-function calculateProfitAndLoss(initial, quantity, current) {
-    if (initial > current) {
-        var loss = (initial - current) * quantity;
-        var lossPercentage = (loss / initial) * 100;
-
-        showOutput(
-            `Hey, the loss is ${loss} and the percent is ${lossPercentage}%`
-        );
-    } else if (current > initial) {
-        var profit = (current - initial) * quantity;
-        var profitPercentage = (profit / initial) * 100;
-
-        showOutput(
-            `Hey, the profit is ${profit} and the percent is ${profitPercentage}%`
-        );
-    } else {
-        showOutput(`No pain no gain and no gain no pain`);
+function stockProfitAndLoss(initial, stock, current){
+    if(initial > current){
+        var loss = (initial - current) * stock;
+        var lossPercentage = (loss * initial) / stock;
+        output(`Loss = ${loss} and Loss Percentage = ${lossPercentage} %`);
+    }else if(current > initial){
+        var profit = (current - initial) * stock;
+        var profitPercentage = (profit * initial) / stock;
+        output(`profit = ${profit} and profit Percentage = ${profitPercentage} %`);
+    }else{
+        output("You are stuck.")
     }
 }
 
-function showOutput(message) {
+function output(message){
     outputBox.innerHTML = message;
 }
